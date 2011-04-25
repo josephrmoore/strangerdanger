@@ -2,7 +2,9 @@ Strangerdanger::Application.routes.draw do
   resources :users, :user_sessions
     match 'login' => 'user_sessions#new', :as => :login
     match 'logout' => 'user_sessions#destroy', :as => :logout
-
+    match '/backyard',    :to => 'pages#backyard'
+    root :to => 'pages#home'
+    
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
