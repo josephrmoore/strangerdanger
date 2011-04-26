@@ -9,6 +9,8 @@ gem 'sqlite3'
 
 gem 'authlogic'
 
+gem "acl9"
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

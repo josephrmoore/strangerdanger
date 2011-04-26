@@ -1,4 +1,9 @@
 class UsersController < ApplicationController
+  
+  access_control do   
+     allow logged_in
+  end
+  
   # GET /users
   # GET /users.xml
   def index
