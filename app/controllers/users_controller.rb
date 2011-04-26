@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   
+  rescue_from 'Acl9::AccessDenied', :with => :access_denied
+  
   access_control do   
      allow logged_in
   end
@@ -85,4 +87,9 @@ class UsersController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def access_denied
+    redirect_to login_path
+  end
+  
 end
