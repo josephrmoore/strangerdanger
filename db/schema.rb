@@ -10,7 +10,35 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110426212441) do
+ActiveRecord::Schema.define(:version => 20110426231510) do
+
+  create_table "comments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "song_id"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "parts", :force => true do |t|
+    t.string "name"
+  end
+
+  create_table "parts_key", :id => false, :force => true do |t|
+    t.integer "song_id"
+    t.integer "part_id"
+    t.integer "user_id"
+  end
+
+  create_table "requests", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "song"
+    t.string   "part"
+    t.text     "comments"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "roles", :force => true do |t|
     t.string   "name",              :limit => 40
@@ -23,6 +51,16 @@ ActiveRecord::Schema.define(:version => 20110426212441) do
   create_table "roles_users", :id => false, :force => true do |t|
     t.integer  "user_id"
     t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "songs", :force => true do |t|
+    t.string   "name"
+    t.string   "file"
+    t.boolean  "active",     :default => false
+    t.boolean  "recorded",   :default => false
+    t.boolean  "current",    :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

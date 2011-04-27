@@ -10,12 +10,17 @@
 			<tr>
 				<th>Name</th>
 				<th>Email</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
+			<% @users.each do |user| %>
 			<tr>
-				<td></td>
+				<td><%= user.username %></td>
+				<td><%= user.email %></td>
+				<td><%= link_to("Edit", edit_user_path(user)) %></td>
 			</tr>
+			<% end %>
 		</tbody>
 	</table>
 </section>

@@ -21,6 +21,10 @@ class PagesController < ApplicationController
   def admin
     @title = "Admin Controls"
     @logo = "logo_awesome.png"
+    @users = User.all
+    @songs = Song.all
+    @parts = Part.all
+    @comments = Comments.all
   end
   
   def access_denied
