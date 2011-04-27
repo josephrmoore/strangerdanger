@@ -1,6 +1,7 @@
 <h2>Admin Page</h2>
 
 <section class="users">
+	<h1>Users</h1>
 	<table>
 		<colgroup>
 			<col class="name">
@@ -23,20 +24,53 @@
 			<% end %>
 		</tbody>
 	</table>
+	<%= link_to("New User", new_user_path) %>
 </section>
 
 <section class="comments">
-
+	<h1>Comments</h1>
 </section>
 
 <section class="requests">
-
+	<h1>Requests</h1>
 </section>
 
 <section class="parts">
-
+	<h1>Parts</h1>
 </section>
 
 <section class="songs">
-
+	<h1>Songs</h1>
+	<table>
+		<colgroup>
+			<col class="name">
+			<col class="file">
+			<col class="active">
+			<col class="recorded">
+			<col class="current">
+		</colgroup>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>File</th>
+				<th>Active</th>
+				<th>Recorded</th>
+				<th>Current</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @songs.each do |song| %>
+			<tr>
+				<td><%= song.name %></td>
+				<td><%= song.file %></td>
+				<td><%= song.active %></td>
+				<td><%= song.recorded %></td>
+				<td><%= song.current %></td>
+				<td><%= link_to("Edit", edit_song_path(song)) %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+	<%= link_to("New Song", new_song_path) %>
 </section>
