@@ -1,11 +1,37 @@
 <h2>Admin Page</h2>
 
-<div id="nav">
-    <% if current_user %>
-    <%= link_to "Edit Profile", edit_user_path(current_user.id)%>
-    <%= link_to "Logout", :logout%>
-    <% else %>
-    <%= link_to "Register", new_user_path%> | 
-    <%= link_to "Login", :login %>
-    <% end %>
-</div>
+<section class="users">
+	<table>
+		<colgroup>
+			<col class="name">
+			<col class="email">
+		</colgroup>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Email</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+</section>
+
+<section class="comments">
+
+</section>
+
+<section class="requests">
+
+</section>
+
+<section class="parts">
+
+</section>
+
+<section class="songs">
+
+</section>
