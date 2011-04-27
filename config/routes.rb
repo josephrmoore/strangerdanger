@@ -1,5 +1,5 @@
 Strangerdanger::Application.routes.draw do
-  resources :users, :user_sessions, :songs
+  resources :users, :user_sessions, :songs, :parts
     match 'login' => 'user_sessions#new', :as => :login
     match 'logout' => 'user_sessions#destroy', :as => :logout
     match '/backyard',    :to => 'pages#backyard'

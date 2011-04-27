@@ -4,8 +4,8 @@
 	<h1>Users</h1>
 	<table>
 		<colgroup>
-			<col class="name">
-			<col class="email">
+			<col class="name" />
+			<col class="email" />
 		</colgroup>
 		<thead>
 			<tr>
@@ -15,12 +15,16 @@
 			</tr>
 		</thead>
 		<tbody>
+			<% if @users && @users.size != 0 %>
 			<% @users.each do |user| %>
 			<tr>
 				<td><%= user.username %></td>
 				<td><%= user.email %></td>
 				<td><%= link_to("Edit", edit_user_path(user)) %></td>
 			</tr>
+			<% end %>
+			<% else %>
+				<td colspan="3">No Users yet</td>
 			<% end %>
 		</tbody>
 	</table>
@@ -29,14 +33,102 @@
 
 <section class="comments">
 	<h1>Comments</h1>
+	<table>
+		<colgroup>
+			<col class="song" />
+			<col class="user" />
+			<col class="content" />
+		</colgroup>
+		<thead>
+			<tr>
+				<th>Song</th>
+				<th>User</th>
+				<th>Content</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% if @comments && @comments.size != 0 %>
+			<% @comments.each do |comment| %>
+			<tr>
+				<td><%= comment.song_id %></td>
+				<td><%= comment.user_id %></td>
+				<td><%= comment.content %></td>
+				<td><%= link_to("Edit", edit_comment_path(comment)) %></td>
+			</tr>
+			<% end %>
+			<% else %>
+				<td colspan="4">No Comments yet</td>
+			<% end %>
+		</tbody>
+	</table>
 </section>
 
 <section class="requests">
 	<h1>Requests</h1>
+	<table>
+		<colgroup>
+			<col class="name" />
+			<col class="email" />
+			<col class="song" />
+			<col class="part" />
+			<col class="comments" />
+		</colgroup>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Song</th>
+				<th>Part</th>
+				<th>Comments</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% if @requests && @requests.size != 0 %>
+			<% @requests.each do |request| %>
+			<tr>
+				<td><%= request.name %></td>
+				<td><%= request.email %></td>
+				<td><%= request.song %></td>
+				<td><%= request.part %></td>
+				<td><%= request.comments %></td>
+				<td><%= link_to("Edit", edit_request_path(request)) %></td>
+			</tr>
+			<% end %>
+			<% else %>
+				<td colspan="6">No Requests yet</td>
+			<% end %>
+		</tbody>
+	</table>
 </section>
 
 <section class="parts">
 	<h1>Parts</h1>
+	<table>
+		<colgroup>
+			<col class="name" />
+		</colgroup>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% if @parts && @parts.size != 0 %>
+			<% @parts.each do |part| %>
+			<tr>
+				<td><%= part.name %></td>
+				<td><%= link_to("Edit", edit_part_path(part)) %></td>
+			</tr>
+			<% end %>
+			<% else %>
+				<td colspan="2">No Parts yet</td>
+			<% end %>
+		</tbody>
+	</table>
+	<%= link_to("New Part", new_part_path) %>
 </section>
 
 <section class="songs">
@@ -60,6 +152,7 @@
 			</tr>
 		</thead>
 		<tbody>
+			<% if @songs && @songs.size != 0 %>
 			<% @songs.each do |song| %>
 			<tr>
 				<td><%= song.name %></td>
@@ -69,6 +162,9 @@
 				<td><%= song.current %></td>
 				<td><%= link_to("Edit", edit_song_path(song)) %></td>
 			</tr>
+			<% end %>
+			<% else %>
+				<td colspan="6">No Songs yet</td>
 			<% end %>
 		</tbody>
 	</table>
