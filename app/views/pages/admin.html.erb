@@ -148,6 +148,7 @@
 				<th>Active</th>
 				<th>Recorded</th>
 				<th>Current</th>
+				<th>Parts</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -160,6 +161,7 @@
 				<td><%= song.active %></td>
 				<td><%= song.recorded %></td>
 				<td><%= song.current %></td>
+				<td></td>
 				<td><%= link_to("Edit", edit_song_path(song)) %></td>
 			</tr>
 			<% end %>

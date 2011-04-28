@@ -22,7 +22,11 @@
 	</article>
 	
 	<section class="player">
-		
+		<% if @songs && @songs.size != 0 %>
+		<% @songs.each do |song| %>
+			<p class="title"><%= song.name %></p>
+		<% end %>
+		<% end %>
 	</section>
 	
 <section>

@@ -11,6 +11,7 @@ class PagesController < ApplicationController
   def home
     @title = "Home"
     @logo = "logo_large.png"
+    @songs = Song.all
   end
 
   def backyard
