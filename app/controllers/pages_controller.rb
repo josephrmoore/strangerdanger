@@ -26,6 +26,7 @@ class PagesController < ApplicationController
     @songs = Song.all
     @parts = Part.all
     @comments = Comments.all
+    @assignments = Assignment.all
   end
   
   def access_denied

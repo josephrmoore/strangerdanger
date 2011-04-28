@@ -161,7 +161,23 @@
 				<td><%= song.active %></td>
 				<td><%= song.recorded %></td>
 				<td><%= song.current %></td>
-				<td></td>
+				<td>
+					<ul>
+						<% if @assignments && @assignments.size != 0 %>
+						<% @assignments.each do |assignment| %>
+						<li>
+							<% if assignment.song_id == song.id %>
+								<%= Part.find(assignment.part_id).name %> 
+								<% if assignment.user_id %>
+								 - 
+								<%= User.find(assignment.user_id).username %>								
+								<% end %>
+							<% end %>
+						</li>
+						<% end %>
+						<% end %>
+					</ul>
+				</td>
 				<td><%= link_to("Edit", edit_song_path(song)) %></td>
 			</tr>
 			<% end %>

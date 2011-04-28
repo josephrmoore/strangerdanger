@@ -10,7 +10,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110428040421) do
+ActiveRecord::Schema.define(:version => 20110428065115) do
+
+  create_table "assignments", :force => true do |t|
+    t.integer  "part_id"
+    t.integer  "song_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "comments", :force => true do |t|
     t.integer  "user_id"
@@ -28,11 +36,6 @@ ActiveRecord::Schema.define(:version => 20110428040421) do
     t.integer "song_id"
     t.integer "part_id"
     t.integer "user_id"
-  end
-
-  create_table "parts_songs", :id => false, :force => true do |t|
-    t.integer "song_id"
-    t.integer "part_id"
   end
 
   create_table "requests", :force => true do |t|
