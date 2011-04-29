@@ -1,9 +1,15 @@
 module UsersHelper
-  def checkadmin(user)
+  
+  def checkusers(user)
     if user
-      if user.has_role?(:admin)
-        link_to("Admin Section", admin_path)
-      end
+      return true
     end
   end
+  
+  def checkadmin(user)
+    if user.has_role?(:admin)
+      return true
+    end
+  end
+  
 end

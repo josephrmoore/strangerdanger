@@ -13,19 +13,19 @@
 			<h2>A NYC Music Co-op</h2>
 		</hgroup>
 		
-		<% if current_user %>
-	    <%= link_to current_user.username, edit_user_path(current_user.id)%> | 
-	    <%= link_to "Logout", :logout%>
+		<% if checkusers(current_user) %>	
+			<%= link_to(current_user.username, edit_user_path(current_user.id)) %> | 
+		    <%= link_to("Logout", :logout) %>
+			<% if checkadmin(current_user) %>
+		  		 | <%= link_to("Admin Section", admin_path) %>
+			<% end %>
 		<% end %>
-	
-		<%= checkadmin(current_user) %>	
-		
 	</header>
 
 <%= yield %>
 
 <footer>
-	<%= link_to("contact: info@strangerdanger.com", "mailto:info@strangerdanger.com") %>
+	<span class="contact">contact: <%= link_to("info@strangerdanger.com", "mailto:info@strangerdanger.com") %></span>
 	<span class="copyright">&copy; 2011</span>
 </footer>
 

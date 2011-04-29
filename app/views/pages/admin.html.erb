@@ -51,8 +51,8 @@
 			<% if @comments && @comments.size != 0 %>
 			<% @comments.each do |comment| %>
 			<tr>
-				<td><%= comment.song_id %></td>
-				<td><%= comment.user_id %></td>
+				<td><%= Song.find(comment.song_id).name %></td>
+				<td><%= User.find(comment.user_id).username %></td>
 				<td><%= comment.content %></td>
 				<td><%= link_to("Edit", edit_comment_path(comment)) %></td>
 			</tr>

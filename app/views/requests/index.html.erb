@@ -1,0 +1,21 @@
+<h1>Listing requests</h1>
+<p id="notice"><%= notice %></p>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Song</th>
+    <th>Part</th>
+    <th>Comments</th>
+  </tr>
+
+<% @requests.each do |request| %>
+  <tr>
+    <td><%= request.name %></td>
+    <td><%= request.email %></td>
+    <td><%= request.song %></td>
+    <td><%= request.part %></td>
+    <td><%= request.comments %></td>
+  </tr>
+<% end %>
+</table>
