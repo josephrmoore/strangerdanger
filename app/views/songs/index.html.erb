@@ -16,6 +16,14 @@
 	<td><%= song.active %></td>
 	<td><%= song.recorded %></td>
 	<td><%= song.current %></td>
+	<td>
+		<% @assignments.each do |assignment| %>
+			<% if assignment.song_id == song.id %>
+				<%= Part.find(assignment.part_id).name %> - 
+				<%= User.find(assignment.user_id).username %>
+			<% end %>
+		<% end %>
+	</td>
   </tr>
 <% end %>
 </table>

@@ -31,6 +31,39 @@ class PartsController < ApplicationController
     @part = Part.find(params[:id])
   end
   
+  def update
+    @part = Part.find(params[:id])
+
+    respond_to do |format|
+      if @part.update_attributes(params[:part])
+        format.html { redirect_to(@part, :notice => 'Part was successfully updated.') }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @part.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+  
+  def show
+    @part = Part.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @part }
+    end
+  end
+
+  def destroy
+    @part = Part.find(params[:id])
+    @part.destroy
+
+    respond_to do |format|
+      format.html { redirect_to(parts_url) }
+      format.xml  { head :ok }
+    end
+  end
+  
   def access_denied
     redirect_to backyard_path
   end

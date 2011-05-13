@@ -1,5 +1,107 @@
 <h2>Admin Page</h2>
 
+<section class="assignments">
+	<h1>Assignments</h1>
+	<table>
+		<colgroup>
+			<col class="song">
+			<col class="part">
+			<col class="user">
+		</colgroup>
+		<thead>
+			<tr>
+				<th>Song</th>
+				<th>Part</th>
+				<th>User</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% if @assignments && @assignments.size != 0 %>
+			<% @assignments.each do |assignment| %>
+			<tr>
+				<td><%= song(assignment.song_id) %></td>
+				<td><%= part(assignment.part_id) %></td>
+				<td><%= user(assignment.user_id) %></td>
+				<td><%= link_to("Edit", edit_assignment_path(assignment)) %></td>
+			</tr>
+			<% end %>
+			<% else %>
+				<td colspan="4">No Assignments yet</td>
+			<% end %>
+		</tbody>
+	</table>
+	<%= link_to("New Assignment", new_assignment_path) %>
+</section>
+
+<section class="songs">
+	<h1>Songs</h1>
+	<table>
+		<colgroup>
+			<col class="name">
+			<col class="file">
+			<col class="active">
+			<col class="recorded">
+			<col class="current">
+		</colgroup>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>File</th>
+				<th>Active</th>
+				<th>Recorded</th>
+				<th>Current</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% if @songs && @songs.size != 0 %>
+			<% @songs.each do |song| %>
+			<tr>
+				<td><%= song.name %></td>
+				<td><%= song.file %></td>
+				<td><%= song.active %></td>
+				<td><%= song.recorded %></td>
+				<td><%= song.current %></td>
+				<td><%= link_to("Edit", edit_song_path(song)) %></td>
+			</tr>
+			<% end %>
+			<% else %>
+				<td colspan="6">No Songs yet</td>
+			<% end %>
+		</tbody>
+	</table>
+	<%= link_to("New Song", new_song_path) %>
+</section>
+
+<section class="parts">
+	<h1>Parts</h1>
+	<table>
+		<colgroup>
+			<col class="name" />
+		</colgroup>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% if @parts && @parts.size != 0 %>
+			<% @parts.each do |part| %>
+			<tr>
+				<td><%= part.name %></td>
+				<td><%= link_to("Edit", edit_part_path(part)) %></td>
+			</tr>
+			<% end %>
+			<% else %>
+				<td colspan="2">No Parts yet</td>
+			<% end %>
+		</tbody>
+	</table>
+	<%= link_to("New Part", new_part_path) %>
+</section>
+
 <section class="users">
 	<h1>Users</h1>
 	<table>
@@ -103,88 +205,4 @@
 	</table>
 </section>
 
-<section class="parts">
-	<h1>Parts</h1>
-	<table>
-		<colgroup>
-			<col class="name" />
-		</colgroup>
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			<% if @parts && @parts.size != 0 %>
-			<% @parts.each do |part| %>
-			<tr>
-				<td><%= part.name %></td>
-				<td><%= link_to("Edit", edit_part_path(part)) %></td>
-			</tr>
-			<% end %>
-			<% else %>
-				<td colspan="2">No Parts yet</td>
-			<% end %>
-		</tbody>
-	</table>
-	<%= link_to("New Part", new_part_path) %>
-</section>
 
-<section class="songs">
-	<h1>Songs</h1>
-	<table>
-		<colgroup>
-			<col class="name">
-			<col class="file">
-			<col class="active">
-			<col class="recorded">
-			<col class="current">
-		</colgroup>
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>File</th>
-				<th>Active</th>
-				<th>Recorded</th>
-				<th>Current</th>
-				<th>Parts</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			<% if @songs && @songs.size != 0 %>
-			<% @songs.each do |song| %>
-			<tr>
-				<td><%= song.name %></td>
-				<td><%= song.file %></td>
-				<td><%= song.active %></td>
-				<td><%= song.recorded %></td>
-				<td><%= song.current %></td>
-				<td>
-					<ul>
-						<% if @assignments && @assignments.size != 0 %>
-						<% @assignments.each do |assignment| %>
-						<li>
-							<% if assignment.song_id == song.id %>
-								<%= Part.find(assignment.part_id).name %> 
-								<% if assignment.user_id %>
-								 - 
-								<%= User.find(assignment.user_id).username %>								
-								<% end %>
-							<% end %>
-						</li>
-						<% end %>
-						<% end %>
-					</ul>
-				</td>
-				<td><%= link_to("Edit", edit_song_path(song)) %></td>
-			</tr>
-			<% end %>
-			<% else %>
-				<td colspan="6">No Songs yet</td>
-			<% end %>
-		</tbody>
-	</table>
-	<%= link_to("New Song", new_song_path) %>
-</section>

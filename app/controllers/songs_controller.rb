@@ -9,6 +9,7 @@ class SongsController < ApplicationController
   
   def index
     @songs = Song.all
+    @assignments = Assignment.all
   end
   
   def new
@@ -31,37 +32,40 @@ class SongsController < ApplicationController
   def edit
     @song = Song.find(params[:id])
   end
-  
+
+  def update
+    @song = Song.find(params[:id])
+
+    respond_to do |format|
+      if @song.update_attributes(params[:song])
+        format.html { redirect_to(@song, :notice => 'Song was successfully updated.') }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @song.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  def show
+    @song = Song.find(params[:id])
+    @assignments = Assignment.all
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @song }
+    end
+  end
+
   def destroy
+    @song = Song.find(params[:id])
+    @song.destroy
+
+    respond_to do |format|
+      format.html { redirect_to(songs_url) }
+      format.xml  { head :ok }
+    end
   end
-  
-  def showall
-  end
-  
-  def getparts
-  end
-  
-  def getusers
-  end
-  
-  def addpart
-  end
-  
-  def removepart
-  end
-  
-  def editpart
-  end
-  
-  def filteractive
-  end
-  
-  def filterrecorded
-  end
-  
-  def getcurrent
-  end
-  
+
   def access_denied
     redirect_to backyard_path
   end

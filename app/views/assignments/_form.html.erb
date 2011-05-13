@@ -1,0 +1,26 @@
+<%= form_for(@assignment) do |f| %>
+  <% if @assignment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@assignment.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @assignment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+	<%= f.select :song_id, @songs.map {|r| [r.name, r.id]} %>
+  </div>
+  <div class="field">
+	<%= f.select :part_id, @parts.map {|r| [r.name, r.id]} %>
+  </div>
+  <div class="field">
+  	<%= f.select :user_id, @users.map {|r| [r.username, r.id]} %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

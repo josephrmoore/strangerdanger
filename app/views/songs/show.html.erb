@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @song.name %>
+</p>
+
+<p>
+  <b>File:</b>
+  <%= @song.file %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @song.active %>
+</p>
+
+<p>
+  <b>Recorded:</b>
+  <%= @song.recorded %>
+</p>
+
+<p>
+  <b>Current:</b>
+  <%= @song.current %>
+</p>
+
+<p>
+  <b>Part/User:</b>
+  <% @assignments.each do |assignment| %>
+  <% if assignment.song_id == @song.id %>
+	<%= Part.find(assignment.part_id).name %> - 
+	<%= User.find(assignment.user_id).username %>
+  <% end %>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_song_path(@song) %> |
+<%= link_to 'Back', songs_path %>
