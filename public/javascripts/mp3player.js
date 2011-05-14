@@ -294,5 +294,4 @@ jQuery(document).ready(function($){
 	playlist = new Playlist($('#mp3Player-table'));
 	player = new Player(playlist);
 	init(playlist.rows);
-	alert(mp3player);
 });
