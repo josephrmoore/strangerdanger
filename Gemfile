@@ -11,6 +11,8 @@ gem 'authlogic'
 
 gem "acl9"
 
+gem "jquery-rails"
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

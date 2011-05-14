@@ -21,13 +21,67 @@
 		<p><strong>Thanks for checking it out! Hope to hear from you real soon.</strong></p>
 	</article>
 	
-	<section class="player">
+	<section id="mp3Player" data-folder="music" class="player">
+		
+		<audio id="mp3Player-player">
+			<source id="mp3Player-mp3" src="" />
+			<p class="no-html5">Your browser doesn\'t support HTML5 audio</p>
+		</audio>
+
+		<div id="mp3Player-controls" class="mp3Player-group playerControls">
+			<div id="mp3Player-buttons-container">
+				<button id="mp3Player-prev" class="mp3controls disabled">Prev</button>
+				<div id="mp3Player-play-pause">
+					<button id="mp3Player-play" class="mp3controls">Play</button>
+					<button id="mp3Player-pause" class="mp3controls display-off">Pause</button>
+				</div>
+				<button id="mp3Player-next" class="mp3controls disabled">Next</button>
+			</div>
+
+			<div id="mp3Player-progress-container" class="mp3Player-group progressContainer">
+				<span id="mp3Player-currentTime"></span>
+				<div id="mp3Player-progress" class="loaded"></div>
+				<span id="mp3Player-remainingTime"></span>
+			</div>
+
+			<div id="mp3Player-volume-container" class="mp3Player-group">
+				<span id="mp3Player-min-volume"></span>
+				<div id="mp3Player-volume"></div>
+				<span id="mp3Player-max-volume"></span>
+			</div>
+		</div>
+		
 		<% if @songs && @songs.size != 0 %>
+		<table id="mp3Player-table">
+			<thead>
+			<tr>
+				<th>Song</th>
+				<th>Part(s)</th>
+			</tr>
+			</thead>
+			<tbody>
 		<% @songs.each do |song| %>
-			<p class="title"><%= song.name %></p>
+		<% if song.active == true %>
+			<tr class="song" data-file="<%= song.file %>">
+				<td class="name"><%= song.name %></td>
+				<td>
+					<ul>
+			<% if @assignments && @assignments.size != 0 %>
+			<% @assignments.each do |assignment| %>
+			<% if assignment.song_id == song.id && assignment.user_id != 1 %>
+				<li class="part"><%= part(assignment.part_id) %></li>
+			<% end %>
+			<% end %>
+			<% end %>
+					</ul>
+				</td>
+			</tr>
 		<% end %>
 		<% end %>
+		</table>
+		<% end %>
+		</tbody>
 	</section>
-	
+		
 <section>
 	
