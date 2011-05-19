@@ -17,7 +17,7 @@ class RequestsController < ApplicationController
     @request = Request.new(params[:request])
     respond_to do |format|
       if @request.save
-        format.html { redirect_to(:requests, :notice => 'Registration successfull.') }
+        format.html { redirect_to(:root, :notice => 'Registration successfull.') }
         format.xml  { render :xml => @request, :status => :created, :location => @request }
       else
         format.html { render :action => "new" }

@@ -14,16 +14,20 @@
 				<th>Part</th>
 				<th>User</th>
 				<th></th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 			<% if @assignments && @assignments.size != 0 %>
 			<% @assignments.each do |assignment| %>
 			<tr>
+				<% if !assignment.song_id.nil? && !assignment.part_id.nil? && !assignment.part_id.nil? %>
 				<td><%= song(assignment.song_id) %></td>
 				<td><%= part(assignment.part_id) %></td>
 				<td><%= user(assignment.user_id) %></td>
 				<td><%= link_to("Edit", edit_assignment_path(assignment)) %></td>
+				<td><%= button_to 'Destroy', assignment_path(assignment), :method => :delete, :confirm => 'Are you sure you want to destroy this assignment?' %></td>
+				<% end %>
 			</tr>
 			<% end %>
 			<% else %>
@@ -52,18 +56,22 @@
 				<th>Recorded</th>
 				<th>Current</th>
 				<th></th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 			<% if @songs && @songs.size != 0 %>
 			<% @songs.each do |song| %>
 			<tr>
+				<% if !song.name.nil? && !song.file.nil? && !song.active.nil? && !song.recorded.nil? && !song.current.nil? %>
 				<td><%= song.name %></td>
 				<td><%= song.file %></td>
 				<td><%= song.active %></td>
 				<td><%= song.recorded %></td>
 				<td><%= song.current %></td>
 				<td><%= link_to("Edit", edit_song_path(song)) %></td>
+				<td><%= button_to 'Destroy', song_path(song), :method => :delete, :confirm => 'Are you sure you want to destroy this song?' %></td>
+				<% end %>
 			</tr>
 			<% end %>
 			<% else %>
@@ -84,14 +92,18 @@
 			<tr>
 				<th>Name</th>
 				<th></th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 			<% if @parts && @parts.size != 0 %>
 			<% @parts.each do |part| %>
 			<tr>
+				<% if !part.name.nil? %>
 				<td><%= part.name %></td>
 				<td><%= link_to("Edit", edit_part_path(part)) %></td>
+				<td><%= button_to 'Destroy', part_path(part), :method => :delete, :confirm => 'Are you sure you want to destroy this part?' %></td>
+				<% end %>
 			</tr>
 			<% end %>
 			<% else %>
@@ -114,15 +126,19 @@
 				<th>Name</th>
 				<th>Email</th>
 				<th></th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 			<% if @users && @users.size != 0 %>
 			<% @users.each do |user| %>
 			<tr>
+				<% if !user.username.nil? && !user.email.nil? %>
 				<td><%= user.username %></td>
 				<td><%= user.email %></td>
 				<td><%= link_to("Edit", edit_user_path(user)) %></td>
+				<td><%= button_to 'Destroy', user_path(user), :method => :delete, :confirm => 'Are you sure you want to destroy this user?' %></td>
+				<% end %>
 			</tr>
 			<% end %>
 			<% else %>
@@ -147,16 +163,20 @@
 				<th>User</th>
 				<th>Content</th>
 				<th></th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 			<% if @comments && @comments.size != 0 %>
 			<% @comments.each do |comment| %>
 			<tr>
+				<% if Song.find(comment.song_id) && User.find(comment.user_id) && !comment.content.nil? %>
 				<td><%= Song.find(comment.song_id).name %></td>
 				<td><%= User.find(comment.user_id).username %></td>
 				<td><%= comment.content %></td>
 				<td><%= link_to("Edit", edit_comment_path(comment)) %></td>
+				<td><%= button_to 'Destroy', comment_path(comment), :method => :delete, :confirm => 'Are you sure you want to destroy this comment?' %></td>
+				<% end %>
 			</tr>
 			<% end %>
 			<% else %>
@@ -184,18 +204,22 @@
 				<th>Part</th>
 				<th>Comments</th>
 				<th></th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 			<% if @requests && @requests.size != 0 %>
 			<% @requests.each do |request| %>
 			<tr>
+				<% if !request.name.nil? && !request.email.nil? && !request.song.nil? && !request.part.nil? && request.comments.nil? %>
 				<td><%= request.name %></td>
 				<td><%= request.email %></td>
 				<td><%= request.song %></td>
 				<td><%= request.part %></td>
 				<td><%= request.comments %></td>
 				<td><%= link_to("Edit", edit_request_path(request)) %></td>
+				<td><%= button_to 'Destroy', request_path(request), :method => :delete, :confirm => 'Are you sure you want to destroy this request?' %></td>
+				<% end %>
 			</tr>
 			<% end %>
 			<% else %>

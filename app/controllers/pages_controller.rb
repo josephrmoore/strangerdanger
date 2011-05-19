@@ -14,6 +14,7 @@ class PagesController < ApplicationController
     @songs = Song.all
     @parts = Part.all
     @assignments = Assignment.all
+    @request = Request.new
   end
 
   def backyard
