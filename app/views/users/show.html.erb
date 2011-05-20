@@ -1,29 +1,55 @@
 <p id="notice"><%= notice %></p>
+<table>
+<tr>
+    <td><%= link_to(@user.username, user_path(@user)) %></td>
+	<td>
+		<ul>
+		<% if @assignments && @assignments.size != 0 %>
+			<% @assignments.each do |assignment| %>
+				<% if assignment.user_id == @user.id %>
+					<li>
+						<span>
+							<% @songs.each do |song| %>
+								<% if song.id == assignment.song_id %>
+									<%= link_to(song.name, song_path(song)) %>
+								<% end %>
+							<% end %>
+						</span>
+						<span>
+							<% @parts.each do |part| %>
+								<% if part.id == assignment.part_id %>
+									<%= part.name %>
+								<% end %>
+							<% end %>
+						</span> 
+					</li>
+				<% end %>
+			<% end %>
+		<% end %>
+		</ul>
+	</td>
+  </tr>
+</table>
 
-<p>
-  <b>Username:</b>
-  <%= @user.username %>
-</p>
+<div>
+	<% if @usercomments && @usercomments.size != 0 %>
+	<h2><span class="number"><%= @usercomments.size %></span> Comments by <span class="user"><%= @user.username %></span></h2>
+	<ul>
+		<% @usercomments.each do |usercomment| %>
+		<li>
+			<% if @user.id == usercomment.user_id %>
+			<h3 class="song"><%= song(usercomment.song_id) %></h3>
+			<h4 class="byline"><span class="date"><%= usercomment.created_at %></span></h4>
+			<% end %>
+			<div class="comment-body">
+				<%= usercomment.content %>
+			</div>					
+		</li>
+		<% end %>
+	</ul>
+	<% end %>
+</div>
 
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
-
-<p>
-  <b>Crypted password:</b>
-  <%= @user.crypted_password %>
-</p>
-
-<p>
-  <b>Password salt:</b>
-  <%= @user.password_salt %>
-</p>
-
-<p>
-  <b>Persistence token:</b>
-  <%= @user.persistence_token %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<% if current_user.id == @user.id %>
+	<%= link_to 'Edit', edit_user_path(@user) %>
+<% end %>

@@ -61,7 +61,7 @@ jQuery(document).ready(function($){
 			this.disabled = true;
 			currentSong = index;
 			$('.mp3controls').addClass('disabled');
-			var src = musicFolder + '/' + playlist.songs[currentSong].file;
+			var src = ROOT_PATH + musicFolder + '/' + playlist.songs[currentSong].file;
 			$('#mp3Player-mp3').attr('src', src).appendTo(player.object);
 			this.object[0].load();
 			

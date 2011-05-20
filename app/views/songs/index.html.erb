@@ -1,33 +1,47 @@
-<h1>Listing songs</h1>
+<h1>Songs</h1>
 <p id="notice"><%= notice %></p>
 <table>
   <tr>
     <th>Name</th>
-    <th>File</th>
-    <th>Active</th>
-    <th>Recorded</th>
-    <th>Current</th>
+	<th>Parts/Users</th>
+	<th>Status</th>
   </tr>
 
 <% @songs.each do |song| %>
   <tr>
-    <td><%= song.name %></td>
-    <td><%= song.file %></td>
-	<td><%= song.active %></td>
-	<td><%= song.recorded %></td>
-	<td><%= song.current %></td>
+    <td><%= link_to(song.name, song_path(song)) %></td>
 	<td>
+		<ul>
 		<% @assignments.each do |assignment| %>
 			<% if assignment.song_id == song.id %>
-				<%= Part.find(assignment.part_id).name %> - 
-				<%= User.find(assignment.user_id).username %>
+				<li>
+					
+					<span>
+						<% @parts.each do |part| %>
+							<% if part.id == assignment.part_id %>
+								<%= part.name %>
+							<% end %>
+						<% end %>
+					</span> 
+					<span>
+						<% @users.each do |user| %>
+							<% if user.id == assignment.user_id %>
+								<%= link_to(user.username, user_path(user)) %>
+							<% end %>
+						<% end %>
+					</span>
+				</li>
 			<% end %>
+		<% end %>
+		</ul>
+	</td>
+	<td>
+		<% if song.recorded == true %>
+			<span class="status true">In Production</span>
+		<% else %>
+			<span class="status false"></span>
 		<% end %>
 	</td>
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New Song', new_song_path %>

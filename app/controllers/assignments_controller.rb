@@ -67,7 +67,7 @@ class AssignmentsController < ApplicationController
     @assignment.destroy
 
     respond_to do |format|
-      format.html { redirect_to(:assignments) }
+      format.html { redirect_to(admin_path) }
       format.xml  { head :ok }
     end
   end

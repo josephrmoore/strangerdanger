@@ -10,6 +10,8 @@ class SongsController < ApplicationController
   def index
     @songs = Song.all
     @assignments = Assignment.all
+    @parts = Part.all
+    @users = User.all
   end
   
   def new
@@ -50,6 +52,15 @@ class SongsController < ApplicationController
   def show
     @song = Song.find(params[:id])
     @assignments = Assignment.all
+    @parts = Part.all
+    @users = User.all
+    @comments = Comment.all
+    @songcomments = []
+    @comments.each do |songcomment|
+      if songcomment.song_id == @song.id
+        @songcomments << songcomment
+      end
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @song }
@@ -73,7 +84,7 @@ class SongsController < ApplicationController
     @song.destroy
 
     respond_to do |format|
-      format.html { redirect_to(songs_url) }
+      format.html { redirect_to(admin_path) }
       format.xml  { head :ok }
     end
   end

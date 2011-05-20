@@ -59,7 +59,7 @@ class RequestsController < ApplicationController
     @request.destroy
 
     respond_to do |format|
-      format.html { redirect_to(requests_url) }
+      format.html { redirect_to(admin_path) }
       format.xml  { head :ok }
     end
   end

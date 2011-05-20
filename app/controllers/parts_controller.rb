@@ -65,7 +65,7 @@ class PartsController < ApplicationController
     @part.destroy
 
     respond_to do |format|
-      format.html { redirect_to(parts_url) }
+      format.html { redirect_to(admin_path) }
       format.xml  { head :ok }
     end
   end

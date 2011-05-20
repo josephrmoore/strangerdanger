@@ -3,6 +3,7 @@
 <head>
   <title>Stranger Danger</title>
   <%= stylesheet_link_tag :all %>
+  <script type="text/javascript" charset="utf-8">var ROOT_PATH = "<%= root_path %>";</script>
   <%= javascript_include_tag "jquery.min" %>
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
   <%= javascript_include_tag "jquery.livequery" %>
@@ -20,11 +21,15 @@
 		
 		<% if checkusers(current_user) %>	
 			<%= link_to(current_user.username, edit_user_path(current_user.id)) %> | 
-		    <%= link_to("Logout", :logout) %>
+		    <%= link_to("Logout", :logout) %> |
+		 	<% if request.path_parameters[:action] != "backyard" %>
+				<%= link_to("Backyard", backyard_path, :class => "backyard-link") %> |
+			<% end %>
 			<% if checkadmin(current_user) %>
-		  		 | <%= link_to("Admin Section", admin_path) %>
+		  		 <%= link_to("Admin Section", admin_path) %>
 			<% end %>
 		<% end %>
+		
 	</header>
 
 <%= yield %>

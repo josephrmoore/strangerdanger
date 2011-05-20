@@ -11,7 +11,10 @@ class UsersController < ApplicationController
   # GET /users.xml
   def index
     @users = User.all
-
+    @assignments = Assignment.all
+    @songs = Song.all
+    @parts = Part.all
+    @comments = Comment.all
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @users }
@@ -22,7 +25,16 @@ class UsersController < ApplicationController
   # GET /users/1.xml
   def show
     @user = User.find(params[:id])
-
+    @assignments = Assignment.all
+    @parts = Part.all
+    @songs = Song.all
+    @comments = Comment.all
+    @usercomments = []
+    @comments.each do |usercomment|
+      if usercomment.user_id == @user.id
+        @usercomments << usercomment
+      end
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @user }
@@ -99,7 +111,7 @@ class UsersController < ApplicationController
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to(users_url) }
+      format.html { redirect_to(admin_path) }
       format.xml  { head :ok }
     end
   end
