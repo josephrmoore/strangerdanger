@@ -20,6 +20,12 @@ class PagesController < ApplicationController
   def backyard
     @title = "Backyard"
     @logo = "logo_awesome.png"
+    @songs = Song.all
+    @parts = Part.all
+    @assignments = Assignment.all
+    @users = User.all
+    @comments = Comment.all
+    @comment = Comment.new
   end
   
   def admin

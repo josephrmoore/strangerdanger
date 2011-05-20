@@ -80,6 +80,18 @@ class UsersController < ApplicationController
   # DELETE /users/1.xml
   def destroy
     @user = User.find(params[:id])
+    @comments = Comment.all
+    for comment in @comments
+      if comment.user_id == @user.id
+        comment.destroy
+      end
+    end
+    @assignments = Assignment.all
+    for assignment in @assignments
+      if assignment.user_id == @user.id
+        assignment.destroy
+      end
+    end
     @user.destroy
 
     respond_to do |format|

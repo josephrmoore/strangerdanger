@@ -59,9 +59,16 @@ class SongsController < ApplicationController
   def destroy
     @song = Song.find(params[:id])
     @comments = Comment.all
-    @comments do |comment|
+    for comment in @comments
       if comment.song_id == @song.id
         comment.destroy
+      end
+    end
+    @assignments = Assignment.all
+    for assignment in @assignments
+      if assignment.song_id == @song.id
+        assignment.destroy
+      end
     end
     @song.destroy
 

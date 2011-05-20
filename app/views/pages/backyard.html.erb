@@ -1,2 +1,129 @@
-<h2>BACKYARD, BEEYOTCH!</h2>
+<h2>Welcome to the Backyard!</h2>
 
+<section class="first-time-text">
+	<p>Welcome to the backyard. If you're here, then you recorded a track on one of the project's songs. This section is so you can see the progress that's being made in recording and mixing, as well as leave input an collaborate as much or as little as you'd like in the production process. Take a look around, get to know what's been done, who did what, and make yourself at home!</p>
+</section>
+
+<section class="songs">
+	<article class="current-song">
+		<h1>Current Track Being Tinkered With</h1>
+		<div id="mp3Player" data-folder="music" class="player">
+
+			<audio id="mp3Player-player">
+				<source id="mp3Player-mp3" src="" />
+				<p class="no-html5">Your browser doesn\'t support HTML5 audio</p>
+			</audio>
+
+			<div id="mp3Player-controls" class="mp3Player-group playerControls">
+				<div id="mp3Player-buttons-container">
+					<button id="mp3Player-prev" class="mp3controls disabled">Prev</button>
+					<div id="mp3Player-play-pause">
+						<button id="mp3Player-play" class="mp3controls">Play</button>
+						<button id="mp3Player-pause" class="mp3controls display-off">Pause</button>
+					</div>
+					<button id="mp3Player-next" class="mp3controls disabled">Next</button>
+				</div>
+
+				<div id="mp3Player-progress-container" class="mp3Player-group progressContainer">
+					<span id="mp3Player-currentTime"></span>
+					<div id="mp3Player-progress" class="loaded"></div>
+					<span id="mp3Player-remainingTime"></span>
+				</div>
+
+				<div id="mp3Player-volume-container" class="mp3Player-group">
+					<span id="mp3Player-min-volume"></span>
+					<div id="mp3Player-volume"></div>
+					<span id="mp3Player-max-volume"></span>
+				</div>
+			</div>
+
+			<% if @songs && @songs.size != 0 %>
+			<table id="mp3Player-table">
+				<thead>
+				<tr>
+					<th>Song</th>
+					<th>Part(s)</th>
+				</tr>
+				</thead>
+				<tbody>
+			<% @songs.each do |song| %>
+			<% if song.current == true %>
+				<tr class="song" data-file="<%= song.file %>">
+					<td class="name"><%= song.name %></td>
+					<td>
+						<ul>
+				<% if @assignments && @assignments.size != 0 %>
+				<% @assignments.each do |assignment| %>
+				<% if assignment.song_id == song.id && assignment.user_id != 1 %>
+					<li class="part"><%= part(assignment.part_id) %></li>
+				<% end %>
+				<% end %>
+				<% end %>
+						</ul>
+					</td>
+				</tr>
+			<% end %>
+			<% end %>
+			</table>
+			<% end %>
+			</tbody>
+		</div>
+		<div class="parts">
+			<h2>Parts already recorded</h2>
+			<ul>
+			<% if @assignments && @assignments.size != 0 %>
+			<% @assignments.each do |assignment| %>
+			<% if assignment.song_id == song.id && assignment.user_id != 1 %>
+				<li><span class="part"><%= part(assignment.part_id) %></span> <span class="user"><%= part(assignment.user_id) %></span></li>
+			<% end %>
+			<% end %>
+			<% end %>
+			</ul>
+		</div>
+		<div class="comments">
+			<h1>Comments</h1>
+			<div class="comment-input">
+				<h2>Leave a comment</h2>
+				<%= render "form_backyard" %>
+			</div>
+			<div class="comment-list">
+				<h2><span class="number">X</span> Comments on <span class="song">Song</span></h2>
+				<ul>
+					<li>
+						<h3>Title</h3>
+						<h4 class="byline">By <span class="user">User</span> on <span class="date">Date, Time</span></h4>
+						<div class="comment-body">
+							<p>Lipsum hjke jskj wsjnw sw ipsum hjke jskj wsjnw sw ipsum hjke jskj wsjnw sw ipsum hjke jskj wsjnw sw</p>
+							<p>Lipsum hjke jskj wsjnw sw ipsum hjke jskj wsjnw sw ipsum hjke jskj wsjnw sw ipsum hjke jskj wsjnw sw</p>
+						</div>					
+					</li>
+				</ul>
+			</div>
+		</div>
+	</article>
+	<article class="other-songs">
+		<h1>Other Songs being Worked on</h1>
+		<ul>
+			<% if @songs && @songs.size != 0 %>
+			<% @songs.each do |song| %>
+			<% if song.recorded == true %>
+			<li>
+				<%= link_to(song.name,  song_path(song)) %>
+			</li>
+			<% end %>
+			<% end %>
+			<% end %>
+		</ul>
+	</article>
+</section>
+
+<section class="users">
+	<h1>Users</h1>
+	<ul>
+		<% if @users && @users.size != 0 %>
+		<% @users.each do |user| %>
+		<li><%= link_to(user.username, user_path(user)) %></a></li>
+		<% end %>
+		<% end %>
+	</ul>
+</section>

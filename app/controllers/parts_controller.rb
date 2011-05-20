@@ -56,6 +56,12 @@ class PartsController < ApplicationController
 
   def destroy
     @part = Part.find(params[:id])
+    @assignments = Assignment.all
+    for assignment in @assignments
+      if assignment.part_id == @part.id
+        assignment.destroy
+      end
+    end
     @part.destroy
 
     respond_to do |format|
