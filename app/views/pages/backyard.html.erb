@@ -122,7 +122,7 @@
 		<ul>
 			<% if @songs && @songs.size != 0 %>
 			<% @songs.each do |song| %>
-			<% if song.recorded == true %>
+			<% if song.recorded == true && song.current == false %>
 			<li>
 				<%= link_to(song.name,  song_path(song)) %>
 			</li>
