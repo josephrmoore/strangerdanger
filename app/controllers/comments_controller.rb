@@ -3,10 +3,13 @@ class CommentsController < ApplicationController
   
   access_control do   
     allow :admin
+    allow logged_in, :to => [:create, :new] 
   end
   
   def index
     @comments = Comment.all
+    @songs = Song.all
+    @users = User.all
   end
   
   def new

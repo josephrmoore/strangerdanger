@@ -69,6 +69,8 @@
 			</tbody>
 		</div>
 		<div class="parts">
+			<% @songs.each do |song| %>
+			<% if song.current == true %>
 			<h2>Parts already recorded</h2>
 			<ul>
 			<% if @assignments && @assignments.size != 0 %>
@@ -79,26 +81,40 @@
 			<% end %>
 			<% end %>
 			</ul>
+			<% end %>
+			<% end %>
 		</div>
 		<div class="comments">
+			<% if @comments && @comments.size != 0 %>
 			<h1>Comments</h1>
 			<div class="comment-input">
 				<h2>Leave a comment</h2>
 				<%= render "form_backyard" %>
 			</div>
 			<div class="comment-list">
-				<h2><span class="number">X</span> Comments on <span class="song">Song</span></h2>
+				<% @songs.each do |song| %>
+				<% if song.current == true %>
+				<% if @songcomments && @songcomments.size != 0 %>
+				<h2><span class="number"><%= @songcomments.size %></span> Comments on <span class="song"><%= song.name %></span></h2>
 				<ul>
+					<% @songcomments.each do |songcomment| %>
 					<li>
-						<h3>Title</h3>
-						<h4 class="byline">By <span class="user">User</span> on <span class="date">Date, Time</span></h4>
+						<% @users.each do |user| %>
+						<% if user.id == songcomment.user_id %>
+						<h3 class="byline"><span class="date"><%= songcomment.created_at %></span> By <span class="user"><%= user.username %></span></h3>
+						<% end %>
+						<% end %>
 						<div class="comment-body">
-							<p>Lipsum hjke jskj wsjnw sw ipsum hjke jskj wsjnw sw ipsum hjke jskj wsjnw sw ipsum hjke jskj wsjnw sw</p>
-							<p>Lipsum hjke jskj wsjnw sw ipsum hjke jskj wsjnw sw ipsum hjke jskj wsjnw sw ipsum hjke jskj wsjnw sw</p>
+							<%= songcomment.content %>
 						</div>					
 					</li>
+					<% end %>
 				</ul>
+				<% end %>
+				<% end %>
+				<% end %>
 			</div>
+			<% end %>
 		</div>
 	</article>
 	<article class="other-songs">

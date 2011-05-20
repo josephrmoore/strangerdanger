@@ -26,6 +26,16 @@ class PagesController < ApplicationController
     @users = User.all
     @comments = Comment.all
     @comment = Comment.new
+    @songcomments = []
+    @songs.each do |song|
+      if song.current == true
+        @comments.each do |songcomment|
+          if songcomment.song_id == song.id
+            @songcomments << songcomment
+          end
+        end
+      end
+    end
   end
   
   def admin

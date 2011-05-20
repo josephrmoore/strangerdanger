@@ -168,17 +168,28 @@
 		</thead>
 		<tbody>
 			<% if @comments && @comments.size != 0 %>
-			<% @comments.each do |comment| %>
+				<% @comments.each do |comment| %>
+
 			<tr>
-				<% if Song.find(comment.song_id) && User.find(comment.user_id) && !comment.content.nil? %>
-				<td><%= Song.find(comment.song_id).name %></td>
-				<td><%= User.find(comment.user_id).username %></td>
+				<td>
+				<% @songs.each do |song| %>
+					<% if song.id == comment.song_id %>
+						<%= song.name %>
+					<% end %>
+				<% end %>
+				</td>
+				<td>
+				<% @users.each do |user| %>
+					<% if user.id == comment.user_id %>
+						<%= user.username %>
+					<% end %>
+				<% end %>
+				</td>
 				<td><%= comment.content %></td>
 				<td><%= link_to("Edit", edit_comment_path(comment)) %></td>
 				<td><%= button_to 'Destroy', comment_path(comment), :method => :delete, :confirm => 'Are you sure you want to destroy this comment?' %></td>
-				<% end %>
 			</tr>
-			<% end %>
+				<% end %>
 			<% else %>
 				<td colspan="4">No Comments yet</td>
 			<% end %>
@@ -211,7 +222,7 @@
 			<% if @requests && @requests.size != 0 %>
 			<% @requests.each do |request| %>
 			<tr>
-				<% if !request.name.nil? && !request.email.nil? && !request.song.nil? && !request.part.nil? && request.comments.nil? %>
+				<% if !request.name.nil? && !request.email.nil? && !request.song.nil? && !request.part.nil? && !request.comments.nil? %>
 				<td><%= request.name %></td>
 				<td><%= request.email %></td>
 				<td><%= request.song %></td>

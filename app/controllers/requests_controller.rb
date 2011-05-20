@@ -3,6 +3,7 @@ class RequestsController < ApplicationController
   
   access_control do   
     allow :admin
+    allow anonymous, :to => [:new, :create]
   end
   
   def index

@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   
   access_control do   
      allow :admin
+     allow logged_in, :to=> [:index, :show, :edit]
   end
   
   # GET /users
@@ -42,6 +43,9 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
+    if (!current_user.has_role?("admin") && @user.id != current_user.id)
+      redirect_to backyard_path
+    end
   end
 
   # POST /users

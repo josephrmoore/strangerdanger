@@ -9,8 +9,20 @@
 
 <% @comments.each do |comment| %>
   <tr>
-    <td><%= Song.find(comment.song_id).name %></td>
-    <td><%= User.find(comment.user_id).username %></td>
+    	<td>
+			<% @songs.each do |song| %>
+			<% if song.id == comment.song_id %>
+				<%= song.name %>
+			<% end %>	
+			<% end %>
+		</td>
+		<td>
+		   	<% @users.each do |user| %>
+				<% if comment.user_id == user.id %>
+		    		<%= user.username %>
+				<% end %>
+		 	<% end %>
+		</td>
 	<td><%= comment.content %></td>
   </tr>
 <% end %>

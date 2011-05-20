@@ -11,17 +11,18 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.text_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :song_id %><br />
-    <%= f.text_field :song_id %>
-  </div>
+
+	<% @songs.each do |song| %>
+		<% if song.current == true%>
+			<%= f.hidden_field :song_id, :value => song.id %>
+		<% end %>
+	<% end %>
+	
+	<%= f.hidden_field :user_id, :value => current_user.id %>
+
   <div class="field">
     <%= f.label :content %><br />
-    <%= f.text_field :content %>
+    <%= f.text_area :content %>
   </div>
   <div class="actions">
     <%= f.submit %>

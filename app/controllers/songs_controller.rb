@@ -4,7 +4,7 @@ class SongsController < ApplicationController
   
   access_control do   
     allow :admin
-    allow logged_in, :to=> [:index]
+    allow logged_in, :to=> [:index, :show]
   end
   
   def index
