@@ -1,51 +1,51 @@
-<h1>Listing users</h1>
-<p id="notice"><%= notice %></p>
-<table>
-  <tr>
-    <th>Username</th>
-	<th>Songs/Parts</th>
-	<th>Comments</th>
-  </tr>
+	<h1>Listing users</h1>
+	<p id="notice"><%= notice %></p>
+	<table>
+	  <tr>
+	    <th>Username</th>
+		<th>Songs/Parts</th>
+		<th>Comments</th>
+	  </tr>
 
-<% @users.each do |user| %>
-  <tr>
-    <td><%= link_to(user.username, user_path(user)) %></td>
-	<td>
-		<ul>
-		<% if @assignments && @assignments.size != 0 %>
-			<% @assignments.each do |assignment| %>
-				<% if assignment.user_id == user.id %>
-					<li>
-						<span>
-							<% @songs.each do |song| %>
-								<% if song.id == assignment.song_id %>
-									<%= link_to(song.name, song_path(song)) %>
+	<% @users.each do |user| %>
+	  <tr>
+	    <td><%= link_to(user.username, user_path(user)) %></td>
+		<td>
+			<ul>
+			<% if @assignments && @assignments.size != 0 %>
+				<% @assignments.each do |assignment| %>
+					<% if assignment.user_id == user.id %>
+						<li>
+							<span>
+								<% @songs.each do |song| %>
+									<% if song.id == assignment.song_id %>
+										<%= link_to(song.name, song_path(song)) %>
+									<% end %>
 								<% end %>
-							<% end %>
-						</span>
-						<span>
-							<% @parts.each do |part| %>
-								<% if part.id == assignment.part_id %>
-									<%= part.name %>
+							</span>
+							<span>
+								<% @parts.each do |part| %>
+									<% if part.id == assignment.part_id %>
+										<%= part.name %>
+									<% end %>
 								<% end %>
-							<% end %>
-						</span> 
-					</li>
+							</span> 
+						</li>
+					<% end %>
 				<% end %>
 			<% end %>
-		<% end %>
-		</ul>
-	</td>
-	<td>
-		<% if @comments && @comments.size != 0 %>
-			<% @comments.each do |comment| %>
-				<% if comment.user_id == user.id %>
-					<% @comments_size += 1 %>
+			</ul>
+		</td>
+		<td>
+			<% if @comments && @comments.size != 0 %>
+				<% @comments.each do |comment| %>
+					<% if comment.user_id == user.id %>
+						<% @comments_size += 1 %>
+					<% end %>
 				<% end %>
 			<% end %>
-		<% end %>
-		<%= @comments_size %>
-	</td>
-  </tr>
-<% end %>
-</table>
+			<%= @comments_size %>
+		</td>
+	  </tr>
+	<% end %>
+	</table>

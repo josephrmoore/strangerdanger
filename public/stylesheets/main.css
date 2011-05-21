@@ -1,0 +1,193 @@
+/* Reset */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td, button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+/* remember to define focus styles! */
+:focus {
+  outline: 0;
+}
+
+/* remember to highlight inserts somehow! */
+ins {
+  text-decoration: none;
+}
+del {
+  text-decoration: line-through;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+article,aside,canvas,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section,summary, video {
+  display:block;
+}
+
+/* Clearing Floats */
+
+.group:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+* html .group             { zoom: 1; } /* IE6 */
+*:first-child+html .group { zoom: 1; } /* IE7 */
+
+/* General Styles */
+
+body {
+	font: 14px/1.2 Helvetica, Arial, sans-serif;
+	color:#cecece;
+	background: url(../images/background.jpg) top center no-repeat #545454;
+}
+
+header h1 {
+	font-family:Slackey;
+	font-size:48px;
+}
+
+header h1 a {
+	color:#f6ff00;
+	text-decoration:none;
+	text-shadow:0px 0px 6px #b73636;
+}
+
+header h1 a:hover {
+	text-decoration:underline;
+}
+
+header h2 {
+	color: #d7d592;
+	margin:0 0 0 340px;
+	font-size:18px;
+	font-weight:normal;
+}
+
+hgroup {
+	float:left;
+}
+
+nav.user {
+	float:right;
+	margin-top:20px;
+}
+
+nav.user li {
+	float:left;
+	margin-right:10px;
+}
+
+nav.user li:after {
+	content: "|";
+	margin-left:10px;
+}
+
+nav.user li:last-child:after {
+	content : "";
+}
+
+nav.site {
+	clear:both;
+}
+
+section h1, section h2, section h3, section h4 {
+	font-family:"Luckiest Guy";
+	text-shadow:2px 2px 4px #000;
+}
+
+section h1 {
+	font-size:40px;
+}
+
+section h2 {
+	font-size:30px;
+}
+
+section h3 {
+	font-size:24px;
+}
+
+section h4 {
+	font-size:18px;
+}
+
+strong {
+	font-weight:normal;
+	color:#d7d592;
+}
+
+.wrapper {
+	width:1000px;
+	margin:0 auto;
+}
+
+.body {
+	width:900px;
+	margin:0 auto;
+}
+
+.player {
+	width:600px;
+	margin:0 auto;
+}
+
+.request.form form {
+	position:fixed;
+	width:600px;
+	top:100px;
+	margin:0 150px;
+	display:none;
+}
+
+thead {
+	background:#363636;
+	color:#cecece;
+}
+
+table {
+	background:#cecece;
+	color:#5c5c5c;
+}
+
+th {
+	font-family:"Luckiest Guy";
+	font-size:24px;
+	text-shadow:2px 2px 4px #000;
+}
+

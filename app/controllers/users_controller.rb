@@ -15,6 +15,7 @@ class UsersController < ApplicationController
     @songs = Song.all
     @parts = Part.all
     @comments = Comment.all
+    @comments_size = 0
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @users }

@@ -3,6 +3,8 @@
 <head>
   <title>Stranger Danger</title>
   <%= stylesheet_link_tag :all %>
+  <link href='http://fonts.googleapis.com/css?family=Slackey' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Luckiest+Guy' rel='stylesheet' type='text/css'>
   <script type="text/javascript" charset="utf-8">var ROOT_PATH = "<%= root_path %>";</script>
   <%= javascript_include_tag "jquery.min" %>
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
@@ -13,32 +15,45 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-	<header>
-		<hgroup>
-			<h1><%= link_to("Stranger Danger", "/") %></h1>
-			<h2>A NYC Music Co-op</h2>
-		</hgroup>
-		
-		<% if checkusers(current_user) %>	
-			<%= link_to(current_user.username, edit_user_path(current_user.id)) %> | 
-		    <%= link_to("Logout", :logout) %> |
-		 	<% if request.path_parameters[:action] != "backyard" %>
-				<%= link_to("Backyard", backyard_path, :class => "backyard-link") %> |
-			<% end %>
-			<% if checkadmin(current_user) %>
-		  		 <%= link_to("Admin Section", admin_path) %>
-			<% end %>
-		<% end %>
-		
-	</header>
+	<div class="wrapper">	
+		<header>
+			<hgroup>
+				<h1><%= link_to("Stranger Danger", "/") %></h1>
+				<h2>A NYC Music Co-op</h2>
+			</hgroup>
+			
+			<nav class="user">
+				<ul>
+				<% if checkusers(current_user) %>	
+					<li><%= link_to(current_user.username, edit_user_path(current_user.id)) %></li> 
+				    <li><%= link_to("Logout", :logout) %></li>
+					<% if checkadmin(current_user) %>
+				  		 <li><%= link_to("Admin Section", admin_path) %></li>
+					<% end %>
+				<% end %>
 
-<%= yield %>
-
-<footer>
-	<span class="contact">contact: <%= link_to("info@strangerdanger.com", "mailto:info@strangerdanger.com") %></span>
-	<span class="copyright">&copy; 2011</span>
-</footer>
-
+				</ul>
+			</nav>
+			<nav class="site">
+				<ul>
+					<li><%= link_to("Backyard", backyard_path, :class => "backyard-link") %></li>
+				<% if request.path_parameters[:action] != "home" %>
+					<li><%= link_to("Songs", songs_path) %></li>
+					<li><%= link_to("Users", users_path) %></li>
+				<% end %>
+				</ul>
+			</nav>			
+		</header>
+	
+		<div class="body">
+			<%= yield %>
+		</div>
+	
+		<footer>
+			<span class="contact">contact: <%= link_to("info@strangerdanger.com", "mailto:info@strangerdanger.com") %></span>
+			<span class="copyright">&copy; 2011</span>
+		</footer>
+	</div>
 </body>
 </html>
 
